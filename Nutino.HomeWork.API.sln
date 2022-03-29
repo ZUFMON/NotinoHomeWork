@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nutino.HomeWork.API", "Nutino.HomeWork.API\Nutino.HomeWork.API.csproj", "{D638184A-5C33-44DA-82BF-DD176DA6C205}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nutino.HomeWork.Domain", "Nutino.HomeWork.Domain\Nutino.HomeWork.Domain.csproj", "{05B7F261-3237-49AE-AA7C-1BE4A4D88631}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nutino.HomeWork.Common", "Nutino.HomeWork.Common\Nutino.HomeWork.Common.csproj", "{76909194-D2B8-46F2-BEC8-5FF7FC18B14C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{72C8A3F8-BE68-411F-9872-8C3EE484E647}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutino.HomeWork.Contracts", "Nutino.HomeWork.Contracts\Nutino.HomeWork.Contracts.csproj", "{04EBB236-05C3-417C-B5C1-923476B2767C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutino.HomeWork.Domain.Shared", "Nutino.HomeWork.Domain.Shared\Nutino.HomeWork.Domain.Shared.csproj", "{7AF82038-92E2-4378-AE3F-6E9A2F245679}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D638184A-5C33-44DA-82BF-DD176DA6C205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D638184A-5C33-44DA-82BF-DD176DA6C205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D638184A-5C33-44DA-82BF-DD176DA6C205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D638184A-5C33-44DA-82BF-DD176DA6C205}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05B7F261-3237-49AE-AA7C-1BE4A4D88631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05B7F261-3237-49AE-AA7C-1BE4A4D88631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05B7F261-3237-49AE-AA7C-1BE4A4D88631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05B7F261-3237-49AE-AA7C-1BE4A4D88631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76909194-D2B8-46F2-BEC8-5FF7FC18B14C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76909194-D2B8-46F2-BEC8-5FF7FC18B14C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76909194-D2B8-46F2-BEC8-5FF7FC18B14C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76909194-D2B8-46F2-BEC8-5FF7FC18B14C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72C8A3F8-BE68-411F-9872-8C3EE484E647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72C8A3F8-BE68-411F-9872-8C3EE484E647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72C8A3F8-BE68-411F-9872-8C3EE484E647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72C8A3F8-BE68-411F-9872-8C3EE484E647}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04EBB236-05C3-417C-B5C1-923476B2767C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04EBB236-05C3-417C-B5C1-923476B2767C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04EBB236-05C3-417C-B5C1-923476B2767C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04EBB236-05C3-417C-B5C1-923476B2767C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AF82038-92E2-4378-AE3F-6E9A2F245679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AF82038-92E2-4378-AE3F-6E9A2F245679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AF82038-92E2-4378-AE3F-6E9A2F245679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AF82038-92E2-4378-AE3F-6E9A2F245679}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C39280F-1D88-4A8D-B4CF-00DE9F0B2105}
+	EndGlobalSection
+EndGlobal
