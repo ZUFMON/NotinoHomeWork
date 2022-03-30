@@ -15,5 +15,5 @@ public interface ILoadStringService
     /// <param name="url">load url for example: <example>http://google.com</example></param>
     /// <param name="urlEncoding"> encode url from web</param>
     /// <returns> return structure as string in memory</returns>
-    Task<IData> LoadFromUrl(string url, FileEcodingType urlEncoding = FileEcodingType.UTF8);
+    Task<IData> LoadFromUrlAsync(string url, FileEcodingType urlEncoding = FileEcodingType.UTF8);
 }

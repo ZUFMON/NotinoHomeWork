@@ -7,9 +7,30 @@ using Nutino.HomeWork.Domain.Shared;
 
 namespace Nutino.HomeWork.API.Controllers;
 
+public interface IStreamProcessingController
+{
+    /// <summary> Download file form server to Computer folder</summary>
+    /// <param name="fileName"></param>
+    /// <param name="encodingFile"></param>
+    /// <returns></returns>
+    /// <exception cref="FileNotFoundException"></exception>
+    Task<ActionResult> DownloadFile(string fileName, FileEcodingType encodingFile = FileEcodingType.UTF8);
+
+    /// <summary> Show specific content of url  </summary>
+    /// <param name="url">Url must by definet as valid URI <example>http://google.com</example></param>
+    /// <param name="encodingFile">Type of encoding show content format</param>
+    /// <returns></returns>
+    Task<ActionResult> ShowUrl(string url, FileEcodingType encodingFile = FileEcodingType.UTF8);
+
+    /// <summary> Upload specific file on the server.</summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
+    Task<ActionResult> UploadFile([FromForm] FileTransferDto data);
+}
+
 [ApiController]
 [Route("api/[controller]")]
-public class StreamProcessingController : StreamProcessingControllerBase
+public class StreamProcessingController : StreamProcessingControllerBase, IStreamProcessingController
 {
     private readonly ILogger<StreamProcessingController> _logger;
     private readonly ISaveStringService _saveStringService;
@@ -70,7 +91,7 @@ public class StreamProcessingController : StreamProcessingControllerBase
     {
         _logger.LogDebug("Starting show data on url : {ulr}", url);
 
-        var data = await _loadStringService.LoadFromUrl(url, encodingFile);
+        var data = await _loadStringService.LoadFromUrlAsync(url, encodingFile);
         var file = File(data.DataAsByte, MineTextPLain);
        
         _logger.LogInformation("Url: {url} show successfully", url);

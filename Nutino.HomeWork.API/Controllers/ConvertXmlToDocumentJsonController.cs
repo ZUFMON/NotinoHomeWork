@@ -7,10 +7,15 @@ using Nutino.HomeWork.Domain.XmlTemplates;
 
 namespace Nutino.HomeWork.API.Controllers;
 
+public interface IConvertXmlToDocumentJsonController
+{
+    Task<ActionResult<FileFormatReturnDto>> ConvertXmlToAsync(ConvertXmlToSpecifigDto data);
+}
+
 /// <summary> Controler for Converting source raw to specifig format </summary>
 [ApiController]
 [Route("api/[controller]")]
-public class ConvertXmlToDocumentJsonController : StreamProcessingControllerBase
+public class ConvertXmlToDocumentJsonController : StreamProcessingControllerBase, IConvertXmlToDocumentJsonController
 {
     private readonly ILoadStringService _loadStringService;
     private readonly ILogger<ConvertXmlToDocumentJsonController> _logger;
@@ -33,7 +38,7 @@ public class ConvertXmlToDocumentJsonController : StreamProcessingControllerBase
     [HttpPost("XmlToDocumentJson")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<FileFormatReturnDto>> ConvertXmlTo(ConvertXmlToSpecifigDto data)
+    public async Task<ActionResult<FileFormatReturnDto>> ConvertXmlToAsync(ConvertXmlToSpecifigDto data)
     {
         _logger.LogInformation("Convert File: {file} to type: {convertType}", data.FileName, data.ConvertToFormat.ToString());
         var fi = CheckFile(data.FileName);
@@ -49,6 +54,7 @@ public class ConvertXmlToDocumentJsonController : StreamProcessingControllerBase
 
                 _logger.LogInformation("Converting file: {sourcefile} to {convertfile} ", data.FileName, filenameToSave);
                 return new ActionResult<FileFormatReturnDto>(new FileFormatReturnDto { FileName = filenameToSave, Endcoding = data.FileSaveAsFormat, ConvertedFormat = data.ConvertToFormat });
+            
             default:
                 return new ActionResult<FileFormatReturnDto>(ValidationProblem("Unknow format converting! Convert from xml to specify format is not set in request correct!"));
         }
