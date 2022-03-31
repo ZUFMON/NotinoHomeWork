@@ -11,7 +11,6 @@ public class ConvertXmlToSpecifigDto : FileDescriptionDto
     public ConvertToFormat ConvertToFormat { get; set; } = ConvertToFormat.Json;
 }
 
-
 public class FileFormatReturnDto : FileDescriptionDto
 {
     /// <summary>Type of Format to convert</summary>

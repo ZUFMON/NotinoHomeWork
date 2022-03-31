@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
-namespace Nutino.HomeWork.Domain.XmlTemplates
-{
+namespace Nutino.HomeWork.Domain.XmlTemplates;
+
     /// <remarks/>
     [Serializable]
     [XmlType(AnonymousType = true)]
@@ -19,4 +14,4 @@ namespace Nutino.HomeWork.Domain.XmlTemplates
         [XmlElement(ElementName = "Text")]
         public string Text { get; set; }
     }
-}
+

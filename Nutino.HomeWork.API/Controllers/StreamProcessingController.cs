@@ -1,50 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Nutino.HomeWork.Contracts.Dto;
-using Nutino.HomeWork.Contracts.Dto.Convert;
+﻿using CommandQuery;
+using Microsoft.AspNetCore.Mvc;
+using Nutino.HomeWork.API.CQS;
 using Nutino.HomeWork.Contracts.Dto.File;
-using Nutino.HomeWork.Domain.Services;
 using Nutino.HomeWork.Domain.Shared;
 
 namespace Nutino.HomeWork.API.Controllers;
 
-public interface IStreamProcessingController
-{
-    /// <summary> Download file form server to Computer folder</summary>
-    /// <param name="fileName"></param>
-    /// <param name="encodingFile"></param>
-    /// <returns></returns>
-    /// <exception cref="FileNotFoundException"></exception>
-    Task<ActionResult> DownloadFile(string fileName, FileEcodingType encodingFile = FileEcodingType.UTF8);
-
-    /// <summary> Show specific content of url  </summary>
-    /// <param name="url">Url must by definet as valid URI <example>http://google.com</example></param>
-    /// <param name="encodingFile">Type of encoding show content format</param>
-    /// <returns></returns>
-    Task<ActionResult> ShowUrl(string url, FileEcodingType encodingFile = FileEcodingType.UTF8);
-
-    /// <summary> Upload specific file on the server.</summary>
-    /// <param name="data"></param>
-    /// <returns></returns>
-    Task<ActionResult> UploadFile([FromForm] FileTransferDto data);
-}
-
 [ApiController]
 [Route("api/[controller]")]
-public class StreamProcessingController : StreamProcessingControllerBase, IStreamProcessingController
+public class StreamProcessingController : ControllerBase
 {
     private readonly ILogger<StreamProcessingController> _logger;
-    private readonly ISaveStringService _saveStringService;
-    private readonly ILoadStringService _loadStringService;
+    private readonly IQueryHandler<DownoadFileCqs, DownoadFileReturnCqs> _downloadFileQueryHandler;
+    private readonly IQueryHandler<ShowUrlCqs, ShowUrlReturnCqs> _shoQueryHandler;
+    private readonly ICommandHandler<UploadFileCqs> _uploadFileCommandHandler;
 
-    public StreamProcessingController(
-        ILogger<StreamProcessingController> logger,
-        ISaveStringService saveStringService,
-        ILoadStringService loadStringService,
-        IWebHostEnvironment environment) : base(environment)
+    public StreamProcessingController(ILogger<StreamProcessingController> logger,
+        IQueryHandler<DownoadFileCqs, DownoadFileReturnCqs> downloadFileQueryHandler,
+        IQueryHandler<ShowUrlCqs, ShowUrlReturnCqs> shoQueryHandler,
+        ICommandHandler<UploadFileCqs> uploadFileCommandHandler)
     {
         _logger = logger ?? throw new NullReferenceException(nameof(logger));
-        _saveStringService = saveStringService;
-        _loadStringService = loadStringService;
+        _downloadFileQueryHandler = downloadFileQueryHandler;
+        _shoQueryHandler = shoQueryHandler;
+        _uploadFileCommandHandler = uploadFileCommandHandler;
     }
 
     /// <summary> Download file form server to Computer folder</summary>
@@ -57,22 +36,18 @@ public class StreamProcessingController : StreamProcessingControllerBase, IStrea
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> DownloadFile(string fileName, FileEcodingType encodingFile = FileEcodingType.UTF8)
     {
+
         _logger.LogDebug("Starting donwloading file: {filename}", fileName);
 
-        var fi = CheckFile(fileName);
+        var downloadFile = await _downloadFileQueryHandler.HandleAsync(new DownoadFileCqs { FileName = fileName, EncodingFile = encodingFile }, default);
 
-        _logger.LogDebug("Upload file from path: {p}", fi.FullName);
-        var data = await _loadStringService.LoadFromFileAsync(fi.FullName, encodingFile);
-
-        var contentType = GetContentTypeFromExtensionFile(fi.Extension);
-        var file = File(data.DataAsByte, contentType);
-
+        var file = File(downloadFile.Data.DataAsByte, downloadFile.ContentType);
         var cd = new System.Net.Mime.ContentDisposition
         {
-            FileName = fi.Name,
+            FileName = downloadFile.Filename,
             // always prompt the user for downloading, set to true if you want 
             // the browser to try to show the file inline
-            Inline = false,
+            Inline = false
         };
 
         Response.Headers.Append("Content-Disposition", cd.ToString());
@@ -80,7 +55,7 @@ public class StreamProcessingController : StreamProcessingControllerBase, IStrea
         return file;
     }
 
-    /// <summary> Show specific content of url  </summary>
+    /// <summary> Show content of url on web adress </summary>
     /// <param name="url">Url must by definet as valid URI <example>http://google.com</example></param>
     /// <param name="encodingFile">Type of encoding show content format</param>
     /// <returns></returns>
@@ -91,9 +66,9 @@ public class StreamProcessingController : StreamProcessingControllerBase, IStrea
     {
         _logger.LogDebug("Starting show data on url : {ulr}", url);
 
-        var data = await _loadStringService.LoadFromUrlAsync(url, encodingFile);
-        var file = File(data.DataAsByte, MineTextPLain);
-       
+        var data = await _shoQueryHandler.HandleAsync(new ShowUrlCqs { Url = url, EncodingFile = encodingFile }, default);
+        var file = File(data.Data.DataAsByte, StreamProcessingBase.MineTextPLain);
+
         _logger.LogInformation("Url: {url} show successfully", url);
         return file;
     }
@@ -107,7 +82,7 @@ public class StreamProcessingController : StreamProcessingControllerBase, IStrea
     public async Task<ActionResult> UploadFile([FromForm] FileTransferDto data)
     {
         _logger.LogDebug("Starting upload file: {filename} with content: {cont}", data.File.FileName, data.File.ContentType);
-        await _saveStringService.SaveToFileAsync(RootPath, data);
+        await _uploadFileCommandHandler.HandleAsync(new UploadFileCqs { Dto = data }, default);
 
         _logger.LogInformation("Upload file was successfully. File: {filename} with content: {cont}", data.File.FileName, data.File.ContentType);
         return Ok("Upload file was successfully");

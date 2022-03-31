@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nutino.HomeWork.Contracts.Interfaces;
+﻿using Nutino.HomeWork.Contracts.Interfaces;
 using Nutino.HomeWork.Domain.ConvertFormat;
 
 namespace Nutino.HomeWork.Domain.Services;

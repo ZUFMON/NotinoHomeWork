@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿namespace Nutino.HomeWork.API.CQS;
 
-namespace Nutino.HomeWork.API.Controllers;
-
-public class StreamProcessingControllerBase : ControllerBase
+public class StreamProcessingBase 
 {
     protected readonly string RootPath;
-    protected const string MineTextPLain = "text/plain";
+    public const string MineTextPLain = "text/plain";
 
-    public StreamProcessingControllerBase(IWebHostEnvironment environment)
+    public StreamProcessingBase(IWebHostEnvironment environment)
     {
         RootPath = environment.ContentRootPath + @"Upload\";
         Directory.CreateDirectory(RootPath);

@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
+﻿using System.Threading.Tasks;
+using CommandQuery;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Moq;
 using Nutino.HomeWork.API.Controllers;
+using Nutino.HomeWork.API.CQS;
 using Nutino.HomeWork.Contracts.Dto.Convert;
-using Nutino.HomeWork.Contracts.Interfaces;
 using Nutino.HomeWork.Domain.Shared;
 using Shouldly;
-using UnitTests.Base;
 using Xunit;
 using Xunit.Abstractions;
-using Xunit.Microsoft.DependencyInjection.Abstracts;
 
-namespace UnitTests.Integration
-{
-    public class ConvertXmlToDocumentControlerTest:TestBed<TestServicesFixture>
+
+namespace UnitTests.Integration;
+
+    public class ConvertXmlToDocumentControlerTest
     {
         private readonly ITestOutputHelper _testOutputHelper;
 
@@ -27,47 +21,48 @@ namespace UnitTests.Integration
         [Fact]
         public async Task ConvertXmlToDocumentControllerTest()
         {
-            ConvertXmlToSpecifigDto dto = new ConvertXmlToSpecifigDto()
-            {
+            ConvertXmlToSpecifigCqs dto = new ConvertXmlToSpecifigCqs(
+            new ConvertXmlToSpecifigDto{
                 ConvertToFormat = ConvertToFormat.Json,
                 Endcoding = FileEcodingType.UTF8,
                 FileName = "TestData\\ConvertXmlToDocumentControllerTest.xml",
                 FileSaveAsFormat = FileEcodingType.UTF8
-            };
+            });
 
-            var returnDto = new FileFormatReturnDto()
+
+            var returnFile = new FileFormatReturnDto
             {
-                Endcoding = FileEcodingType.UTF8,
-                FileName = "FileName.txt",
-                ConvertedFormat = ConvertToFormat.Json
+                FileName = "convertFile.xml",
+                ConvertedFormat = ConvertToFormat.Json,
+                Endcoding = FileEcodingType.UTF8
             };
 
-            var ConvertXmlControlerMock = new Mock<IConvertXmlToDocumentJsonController>();
 
-            var convertXml = new Mock<IConvertorContentFormatFile>();
-            var logger = new Mock<ILogger<ConvertXmlToDocumentJsonController>>();
-            var loadString = new Mock<ILoadStringService>();
-            var saveString = new Mock<ISaveStringService>();
-            var enviroment = new Mock<IWebHostEnvironment>();
+            var queryCommandMock = new Mock<IQueryHandler<ConvertXmlToSpecifigCqs, FileFormatReturnCqs>>();
+            queryCommandMock.Setup(x =>  x.HandleAsync(It.IsAny<ConvertXmlToSpecifigCqs>(), default))
+                .ReturnsAsync(new FileFormatReturnCqs(returnFile));
 
-
-            var returnsResult = ConvertXmlControlerMock.Setup(_ => _.ConvertXmlToAsync(dto)).ReturnsAsync(returnDto);
-
-            
-            var sut = new ConvertXmlToDocumentJsonController(logger.Object, convertXml.Object, loadString.Object, saveString.Object, enviroment.Object);
-
-            var result =  await sut.ConvertXmlToAsync(dto);
+            var sut = new ConvertXmlToDocumentJsonController(queryCommandMock.Object);
+            var result = await sut.ConvertXmlToAsync(dto.Dto);
 
             var resutlCode = result.Result as OkObjectResult;
             resutlCode.ShouldNotBeNull();
             resutlCode.StatusCode.ShouldBe(200);
         }
 
-
-        public ConvertXmlToDocumentControlerTest(ITestOutputHelper testOutputHelper, TestServicesFixture fixture) : base(testOutputHelper, fixture)
+        [Fact]
+        public async Task ConvertXmlToDocumentControllerErrorREsultTest()
         {
-            _testOutputHelper = testOutputHelper ?? throw new ArgumentNullException(nameof(testOutputHelper));
-            
+            var queryCommandMock = new Mock<IQueryHandler<ConvertXmlToSpecifigCqs, FileFormatReturnCqs>>();
+            queryCommandMock.Setup(x => x.HandleAsync(It.IsAny<ConvertXmlToSpecifigCqs>(), default))
+                .ReturnsAsync(new FileFormatReturnCqs(new FileFormatReturnDto()));
+
+            var sut = new ConvertXmlToDocumentJsonController(queryCommandMock.Object);
+            var result = await sut.ConvertXmlToAsync(null);
+
+            var resutlCode = result.Result as OkObjectResult;
+            resutlCode.ShouldNotBeNull();
+            resutlCode.StatusCode.ShouldBe(200);
         }
-    }
 }
+

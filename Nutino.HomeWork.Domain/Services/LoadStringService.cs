@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Nutino.HomeWork.Common;
 using Nutino.HomeWork.Contracts.Interfaces;
 using Nutino.HomeWork.Domain.Shared;

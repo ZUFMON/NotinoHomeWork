@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Nutino.HomeWork.Contracts.Dto.File;
 using Nutino.HomeWork.Contracts.Interfaces;
 using Nutino.HomeWork.Domain.Shared;
 using Shouldly;
 using UnitTests.Base;
 using Xunit;
 using Xunit.Abstractions;
-using Xunit.Microsoft.DependencyInjection;
 using Xunit.Microsoft.DependencyInjection.Abstracts;
 
 namespace UnitTests;

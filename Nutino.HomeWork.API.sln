@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nutino.HomeWork.Domain", "N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nutino.HomeWork.Common", "Nutino.HomeWork.Common\Nutino.HomeWork.Common.csproj", "{76909194-D2B8-46F2-BEC8-5FF7FC18B14C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{72C8A3F8-BE68-411F-9872-8C3EE484E647}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{72C8A3F8-BE68-411F-9872-8C3EE484E647}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutino.HomeWork.Contracts", "Nutino.HomeWork.Contracts\Nutino.HomeWork.Contracts.csproj", "{04EBB236-05C3-417C-B5C1-923476B2767C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nutino.HomeWork.Contracts", "Nutino.HomeWork.Contracts\Nutino.HomeWork.Contracts.csproj", "{04EBB236-05C3-417C-B5C1-923476B2767C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutino.HomeWork.Domain.Shared", "Nutino.HomeWork.Domain.Shared\Nutino.HomeWork.Domain.Shared.csproj", "{7AF82038-92E2-4378-AE3F-6E9A2F245679}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nutino.HomeWork.Domain.Shared", "Nutino.HomeWork.Domain.Shared\Nutino.HomeWork.Domain.Shared.csproj", "{7AF82038-92E2-4378-AE3F-6E9A2F245679}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

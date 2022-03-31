@@ -1,5 +1,4 @@
 using System;
-using System.Reflection.Metadata;
 using Nutino.HomeWork.Contracts.Interfaces;
 using Nutino.HomeWork.Domain.XmlTemplates;
 using UnitTests.Base;
