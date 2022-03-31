@@ -1,4 +1,5 @@
-﻿using Nutino.HomeWork.Contracts.Dto.File;
+﻿using System.ComponentModel.DataAnnotations;
+using Nutino.HomeWork.Contracts.Dto.File;
 using Nutino.HomeWork.Domain.Shared;
 
 namespace Nutino.HomeWork.Contracts.Dto.Convert;
@@ -13,6 +14,7 @@ public class ConvertXmlToSpecifigDto : FileDescriptionDto
 
 public class FileFormatReturnDto : FileDescriptionDto
 {
+    
     /// <summary>Type of Format to convert</summary>
     public ConvertToFormat ConvertedFormat { get; set; } = ConvertToFormat.Json;
 }

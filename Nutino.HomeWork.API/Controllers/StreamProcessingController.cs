@@ -1,4 +1,5 @@
-﻿using CommandQuery;
+﻿using System.ComponentModel.DataAnnotations;
+using CommandQuery;
 using Microsoft.AspNetCore.Mvc;
 using Nutino.HomeWork.API.CQS;
 using Nutino.HomeWork.Contracts.Dto.File;
@@ -34,7 +35,7 @@ public class StreamProcessingController : ControllerBase
     [HttpGet("DownloadFile")]
     [ProducesResponseType(typeof(byte[]), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> DownloadFile(string fileName, FileEcodingType encodingFile = FileEcodingType.UTF8)
+    public async Task<ActionResult> DownloadFile([Required] string fileName, FileEcodingType encodingFile = FileEcodingType.UTF8)
     {
 
         _logger.LogDebug("Starting donwloading file: {filename}", fileName);
