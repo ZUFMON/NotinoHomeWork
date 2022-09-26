@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Nutino.HomeWork.Domain.Shared
+namespace Notino.HomeWork.Domain.Shared
 {
     public enum FileEcodingType
     {

@@ -1,9 +1,9 @@
 ﻿using CommandQuery;
 using Microsoft.AspNetCore.Mvc;
-using Nutino.HomeWork.API.CQS;
-using Nutino.HomeWork.Contracts.Dto.Convert;
+using Notino.HomeWork.API.CQS;
+using Notino.HomeWork.Contracts.Dto.Convert;
 
-namespace Nutino.HomeWork.API.Controllers;
+namespace Notino.HomeWork.API.Controllers;
 
 /// <summary> Controler for Converting source raw to specifig format </summary>
 [ApiController]
@@ -20,10 +20,10 @@ public class ConvertXmlToDocumentJsonController : ControllerBase
     [HttpPost("XmlToDocumentJson")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<FileFormatReturnDto>> ConvertXmlToAsync(ConvertXmlToSpecifigDto data)
+    public async Task<ActionResult<FileFormatReturnDto>> ConvertXmlToAsync(ConvertXmlToSpecifigDto data, CancellationToken cancellationToken)
     {
         var input = new ConvertXmlToSpecifigCqs(data);
-        var resultData = await _queryHandler.HandleAsync(input, default);
+        var resultData = await _queryHandler.HandleAsync(input, cancellationToken);
         return Ok(resultData.Dto);
     }
 }

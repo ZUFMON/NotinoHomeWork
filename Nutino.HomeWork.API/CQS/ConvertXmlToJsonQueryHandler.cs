@@ -1,8 +1,9 @@
 ﻿using CommandQuery;
-using Nutino.HomeWork.Contracts.Dto.Convert;
-using Nutino.HomeWork.Domain.XmlTemplates;
+using Notino.HomeWork.Contracts.Dto.Convert;
+using Notino.HomeWork.Contracts.Interfaces;
+using Notino.HomeWork.Domain.XmlTemplates;
 
-namespace Nutino.HomeWork.API.CQS;
+namespace Notino.HomeWork.API.CQS;
 
 public class FileFormatReturnCqs
 {
@@ -52,7 +53,7 @@ public class ConvertXmlToJsonQueryHandler : StreamProcessingBase, IQueryHandler<
         switch (data.ConvertToFormat)
         {
             case ConvertToFormat.Json:
-                var xml = await _loadStringService.LoadFromFileAsync(fi.FullName, data.Endcoding, cancellationToken);
+                var xml = await _loadStringService.LoadFromFileAsync(fi.FullName, data.Encoding, cancellationToken);
                 var json = _convertorContentFormatFile.ConvertXmlToJson<DocumentXML>(xml.Data);
                 var filenameToSave = RootPath + Path.GetFileNameWithoutExtension(fi.Name) + "." + data.ConvertToFormat;
 
@@ -63,12 +64,27 @@ public class ConvertXmlToJsonQueryHandler : StreamProcessingBase, IQueryHandler<
                     new FileFormatReturnDto
                     {
                         FileName = filenameToSave,
-                        Endcoding = data.FileSaveAsFormat,
+                        Encoding = data.FileSaveAsFormat,
                         ConvertedFormat = data.ConvertToFormat
                     });
+            case ConvertToFormat.Protobuf:
+                throw new NotImplementedException("Protobuf is not implement yet. (only for example code)");
+                /* example protobuf protokol
+                 * var protobuf =  _serviceProtobuf.LoadDataFromDevice()
+                 *  protobuf.processingData();
+                 * var xml = protobuf.ConverToXml(query,data.FileSaveAsFormat);
+                 *
+                 * return new FileFormatReturnCqs(
+                    new FileFormatReturnDto
+                    {
+                        FileName = protobuf.Device.FileName,
+                        Endcoding = data.FileSaveAsFormat,
+                        ConvertedFormat = xml
+                    });
+                 */
 
             default:
-                throw new Exception("Unknow format converting! Convert from xml to specify format is not set in request correct!");
+                throw new Exception("Unknown format converting! Convert from xml to specify format is not set in request correct!");
         }
     }
 }

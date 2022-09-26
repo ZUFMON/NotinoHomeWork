@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using CommandQuery;
 using Microsoft.AspNetCore.Mvc;
-using Nutino.HomeWork.API.CQS;
-using Nutino.HomeWork.Contracts.Dto.File;
-using Nutino.HomeWork.Domain.Shared;
+using Notino.HomeWork.API.CQS;
+using Notino.HomeWork.Contracts.Dto.File;
+using Notino.HomeWork.Domain.Shared;
 
-namespace Nutino.HomeWork.API.Controllers;
+namespace Notino.HomeWork.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

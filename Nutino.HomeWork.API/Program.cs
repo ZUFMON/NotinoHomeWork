@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Http.Json;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using Nutino.HomeWork.API.CQS;
-using Nutino.HomeWork.Domain.Services;
+using Notino.HomeWork.API.CQS;
+using Notino.HomeWork.Domain.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

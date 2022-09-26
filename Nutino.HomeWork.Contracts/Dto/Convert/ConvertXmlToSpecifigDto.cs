@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Nutino.HomeWork.Contracts.Dto.File;
-using Nutino.HomeWork.Domain.Shared;
+using Notino.HomeWork.Contracts.Dto.File;
+using Notino.HomeWork.Domain.Shared;
 
-namespace Nutino.HomeWork.Contracts.Dto.Convert;
+namespace Notino.HomeWork.Contracts.Dto.Convert;
 
 /// <summary> Convert from Xml to specifig format </summary>
 public class ConvertXmlToSpecifigDto : FileDescriptionDto

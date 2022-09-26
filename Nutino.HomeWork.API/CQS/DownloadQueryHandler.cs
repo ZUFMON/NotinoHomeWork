@@ -1,7 +1,8 @@
 ﻿using CommandQuery;
-using Nutino.HomeWork.Domain.Shared;
+using Notino.HomeWork.Contracts.Interfaces;
+using Notino.HomeWork.Domain.Shared;
 
-namespace Nutino.HomeWork.API.CQS;
+namespace Notino.HomeWork.API.CQS;
 
 public class DownoadFileCqs : IQuery<DownoadFileReturnCqs>
 {
@@ -34,7 +35,7 @@ public class DownloadQueryHandler : StreamProcessingBase, IQueryHandler<DownoadF
         var fi = CheckFile(query.FileName);
 
         _logger.LogDebug("Upload file from path: {p}", fi.FullName);
-        var data = await _loadStringService.LoadFromFileAsync(fi.FullName, query.EncodingFile);
+        var data = await _loadStringService.LoadFromFileAsync(fi.FullName, query.EncodingFile, cancellationToken);
 
         var contentType = GetContentTypeFromExtensionFile(fi.Extension);
 

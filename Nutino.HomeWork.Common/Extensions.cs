@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nutino.HomeWork.Common;
+namespace Notino.HomeWork.Common;
 
 public static class Extensions
 {

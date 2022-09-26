@@ -1,9 +1,9 @@
 ﻿using System.Text;
-using Nutino.HomeWork.Common;
-using Nutino.HomeWork.Contracts.Interfaces;
-using Nutino.HomeWork.Domain.Shared;
+using Notino.HomeWork.Contracts.Interfaces;
+using Notino.HomeWork.Domain.Shared;
+using Notino.HomeWork.Common;
 
-namespace Nutino.HomeWork.Domain.Services;
+namespace Notino.HomeWork.Domain.Services;
 
 /// <summary> Service - care of load data from source</summary>
 public class LoadStringService : ILoadStringService
@@ -27,11 +27,12 @@ public class LoadStringService : ILoadStringService
     /// <summary> Load content from url</summary>
     /// <param name="url">load url for example: <example>http://google.com</example></param>
     /// <param name="urlEncoding"> encode url from web</param>
+    /// <param name="cancellationToken">cancellation token</param>
     /// <returns> return structure as string in memory</returns>
-    public async Task<IData> LoadFromUrlAsync(string url, FileEcodingType urlEncoding = FileEcodingType.UTF8)
+    public async Task<IData> LoadFromUrlAsync(string url, FileEcodingType urlEncoding = FileEcodingType.UTF8, CancellationToken cancellationToken = default)
     {
         var client = new HttpClient();
-        var response = await client.GetByteArrayAsync(url);
+        var response = await client.GetByteArrayAsync(url, cancellationToken);
         var encoding = Encoding.GetEncoding(urlEncoding.GetDescription());
 
         var responseString = encoding.GetString(response, 0, response.Length - 1);

@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using CommandQuery;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using Nutino.HomeWork.API.Controllers;
-using Nutino.HomeWork.API.CQS;
-using Nutino.HomeWork.Contracts.Dto.Convert;
-using Nutino.HomeWork.Domain.Shared;
+using Notino.HomeWork.API.Controllers;
+using Notino.HomeWork.API.CQS;
+using Notino.HomeWork.Contracts.Dto.Convert;
+using Notino.HomeWork.Domain.Shared;
 using Shouldly;
 using Xunit;
 using Xunit.Abstractions;
@@ -26,7 +27,7 @@ public class ConvertXmlToDocumentControlerTest
         new ConvertXmlToSpecifigDto
         {
             ConvertToFormat = ConvertToFormat.Json,
-            Endcoding = FileEcodingType.UTF8,
+            Encoding = FileEcodingType.UTF8,
             FileName = "TestData\\ConvertXmlToDocumentControllerTest.xml",
             FileSaveAsFormat = FileEcodingType.UTF8
         });
@@ -36,7 +37,7 @@ public class ConvertXmlToDocumentControlerTest
         {
             FileName = "convertFile.xml",
             ConvertedFormat = ConvertToFormat.Json,
-            Endcoding = FileEcodingType.UTF8
+            Encoding = FileEcodingType.UTF8
         };
 
 
@@ -45,7 +46,7 @@ public class ConvertXmlToDocumentControlerTest
             .ReturnsAsync(new FileFormatReturnCqs(returnFile));
 
         var sut = new ConvertXmlToDocumentJsonController(queryCommandMock.Object);
-        var result = await sut.ConvertXmlToAsync(dto.Dto);
+        var result = await sut.ConvertXmlToAsync(dto.Dto, CancellationToken.None);
 
         var resutlCode = result.Result as OkObjectResult;
         resutlCode.ShouldNotBeNull();
@@ -61,7 +62,7 @@ public class ConvertXmlToDocumentControlerTest
 
         var sut = new ConvertXmlToDocumentJsonController(queryCommandMock.Object);
 
-        Should.Throw<Exception>(async () => await sut.ConvertXmlToAsync(null));
+        Should.Throw<Exception>(async () => await sut.ConvertXmlToAsync(null, CancellationToken.None));
 
     }
 }

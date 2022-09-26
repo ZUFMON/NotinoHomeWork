@@ -1,4 +1,4 @@
-﻿namespace Nutino.HomeWork.API.CQS;
+﻿namespace Notino.HomeWork.API.CQS;
 
 public class StreamProcessingBase 
 {
