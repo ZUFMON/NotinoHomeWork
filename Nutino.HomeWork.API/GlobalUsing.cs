@@ -1,1 +1,1 @@
-﻿global using Nutino.HomeWork.Contracts.Interfaces;
+﻿global using Notino.HomeWork.Contracts.Interfaces;

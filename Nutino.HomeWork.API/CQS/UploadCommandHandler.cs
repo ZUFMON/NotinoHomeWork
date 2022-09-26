@@ -1,7 +1,8 @@
 ﻿using CommandQuery;
-using Nutino.HomeWork.Contracts.Dto.File;
+using Notino.HomeWork.Contracts.Dto.File;
+using Notino.HomeWork.Contracts.Interfaces;
 
-namespace Nutino.HomeWork.API.CQS;
+namespace Notino.HomeWork.API.CQS;
 
 public class UploadFileCqs : ICommand
 {

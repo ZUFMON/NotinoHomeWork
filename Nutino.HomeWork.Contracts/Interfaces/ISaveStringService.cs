@@ -1,7 +1,7 @@
-﻿using Nutino.HomeWork.Contracts.Dto.File;
-using Nutino.HomeWork.Domain.Shared;
+﻿using Notino.HomeWork.Contracts.Dto.File;
+using Notino.HomeWork.Domain.Shared;
 
-namespace Nutino.HomeWork.Contracts.Interfaces;
+namespace Notino.HomeWork.Contracts.Interfaces;
 
 public interface ISaveStringService
 {

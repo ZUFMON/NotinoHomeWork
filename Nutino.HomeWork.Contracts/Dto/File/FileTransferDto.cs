@@ -1,22 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
-using Nutino.HomeWork.Domain.Shared;
+using Notino.HomeWork.Domain.Shared;
 
-namespace Nutino.HomeWork.Contracts.Dto.File;
+namespace Notino.HomeWork.Contracts.Dto.File;
 
 public class FileTransferDto : EncodingFile
 {
     [Required]
-    public IFormFile File { get; set; }
+    public IFormFile File { get; set; } = default!;
 }
 
 public class EncodingFile
 {
-    public FileEcodingType Endcoding { get; set; } = FileEcodingType.UTF8;
+    public FileEcodingType Encoding { get; set; } = FileEcodingType.UTF8;
 }
 
 public class FileDescriptionDto : EncodingFile
 {
     [Required]
-    public string FileName { get; set; }
+    public string FileName { get; set; } = default!;
 }

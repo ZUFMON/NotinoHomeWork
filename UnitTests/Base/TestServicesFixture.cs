@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Nutino.HomeWork.Contracts.Interfaces;
-using Nutino.HomeWork.Domain.Services;
+using Notino.HomeWork.Contracts.Interfaces;
+using Notino.HomeWork.Domain.Services;
 using Xunit.Microsoft.DependencyInjection;
 using Xunit.Microsoft.DependencyInjection.Abstracts;
 

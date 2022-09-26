@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Nutino.HomeWork.Domain.XmlTemplates;
+namespace Notino.HomeWork.Domain.XmlTemplates;
 
     /// <remarks/>
     [Serializable]

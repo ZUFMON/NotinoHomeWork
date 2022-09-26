@@ -1,8 +1,8 @@
 ﻿using System.Text;
-using Nutino.HomeWork.Common;
-using Nutino.HomeWork.Domain.Shared;
+using Notino.HomeWork.Domain.Shared;
+using Notino.HomeWork.Common;
 
-namespace Nutino.HomeWork.Contracts.Interfaces;
+namespace Notino.HomeWork.Contracts.Interfaces;
 
 public interface IData
 {

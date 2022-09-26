@@ -1,7 +1,7 @@
-﻿using Nutino.HomeWork.Contracts.Interfaces;
-using Nutino.HomeWork.Domain.Shared;
+﻿using Notino.HomeWork.Contracts.Interfaces;
+using Notino.HomeWork.Domain.Shared;
 
-namespace Nutino.HomeWork.Domain.Services;
+namespace Notino.HomeWork.Domain.Services;
 
 /// <summary> Description important values and raw DATA to work</summary>
 public class RawData : IData

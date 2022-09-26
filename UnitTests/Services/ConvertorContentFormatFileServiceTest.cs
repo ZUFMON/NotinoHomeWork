@@ -1,6 +1,6 @@
 using System;
-using Nutino.HomeWork.Contracts.Interfaces;
-using Nutino.HomeWork.Domain.XmlTemplates;
+using Notino.HomeWork.Contracts.Interfaces;
+using Notino.HomeWork.Domain.XmlTemplates;
 using UnitTests.Base;
 using Xunit;
 using Xunit.Abstractions;
@@ -37,7 +37,7 @@ public class ConvertorContentFormatFileServiceTest : TestBed<TestServicesFixture
 
     public ConvertorContentFormatFileServiceTest(ITestOutputHelper testOutputHelper, TestServicesFixture fixture) : base(testOutputHelper, fixture)
     {
-        _testOutputHelper = testOutputHelper ?? throw new NullReferenceException(nameof(testOutputHelper));
-        _convertXmlToDoc = fixture.GetService<IConvertorContentFormatFile>(testOutputHelper) ?? throw new NullReferenceException(nameof(IConvertorContentFormatFile));
+        _testOutputHelper = testOutputHelper ?? throw new ArgumentNullException(nameof(testOutputHelper));
+        _convertXmlToDoc = fixture.GetService<IConvertorContentFormatFile>(testOutputHelper) ?? throw new ArgumentNullException(nameof(IConvertorContentFormatFile));
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Nutino.HomeWork.Contracts.Interfaces;
-using Nutino.HomeWork.Domain.Shared;
+using Notino.HomeWork.Contracts.Interfaces;
+using Notino.HomeWork.Domain.Shared;
 using Shouldly;
 using UnitTests.Base;
 using Xunit;
@@ -61,8 +61,8 @@ public class StreamProcessingServiceTest : TestBed<TestServicesFixture>
 
     public StreamProcessingServiceTest(ITestOutputHelper testOutputHelper, TestServicesFixture fixture) : base(testOutputHelper, fixture)
     {
-        _testOutputHelper = testOutputHelper ?? throw new NullReferenceException(nameof(testOutputHelper));
-        _saveStringService = fixture.GetService<ISaveStringService>(testOutputHelper) ?? throw new NullReferenceException(nameof(ISaveStringService));
-        _loadStringService = fixture.GetService<ILoadStringService>(testOutputHelper) ?? throw new NullReferenceException(nameof(ILoadStringService));
+        _testOutputHelper = testOutputHelper ?? throw new ArgumentNullException(nameof(testOutputHelper));
+        _saveStringService = fixture.GetService<ISaveStringService>(testOutputHelper) ?? throw new ArgumentNullException(nameof(ISaveStringService));
+        _loadStringService = fixture.GetService<ILoadStringService>(testOutputHelper) ?? throw new ArgumentNullException(nameof(ILoadStringService));
     }
 }

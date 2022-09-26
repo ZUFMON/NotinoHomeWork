@@ -1,11 +1,11 @@
 ﻿using System.Text;
 using Microsoft.Extensions.Logging;
-using Nutino.HomeWork.Common;
-using Nutino.HomeWork.Contracts.Dto.File;
-using Nutino.HomeWork.Contracts.Interfaces;
-using Nutino.HomeWork.Domain.Shared;
+using Notino.HomeWork.Contracts.Dto.File;
+using Notino.HomeWork.Contracts.Interfaces;
+using Notino.HomeWork.Domain.Shared;
+using Notino.HomeWork.Common;
 
-namespace Nutino.HomeWork.Domain.Services;
+namespace Notino.HomeWork.Domain.Services;
 
 /// <summary> Service - care about how to and where save stream data </summary>
 public class SaveStringService : ISaveStringService
@@ -25,7 +25,7 @@ public class SaveStringService : ISaveStringService
     /// <returns></returns>
     public async Task SaveToFileAsync(string path, FileTransferDto fileTransfer, CancellationToken cancellationToken = default)
     {
-        var encoding = Encoding.GetEncoding(fileTransfer.Endcoding.GetDescription());
+        var encoding = Encoding.GetEncoding(fileTransfer.Encoding.GetDescription());
         var contentFile = encoding.GetString(fileTransfer.File.GetBytes());
         var fullPathFilename = Path.Combine(path, fileTransfer.File.FileName);
 

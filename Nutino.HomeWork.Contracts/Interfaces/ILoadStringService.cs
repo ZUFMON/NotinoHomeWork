@@ -1,8 +1,8 @@
-﻿using Nutino.HomeWork.Domain.Shared;
+﻿using Notino.HomeWork.Domain.Shared;
 
-namespace Nutino.HomeWork.Contracts.Interfaces;
+namespace Notino.HomeWork.Contracts.Interfaces;
 
-public interface ILoadStringService 
+public interface ILoadStringService
 {
     /// <summary> Upload local or network file on server </summary>
     /// <param name="filename"> path filename (it mus by full path) <example> C:\Folder\myFile.xml</example></param>
@@ -15,5 +15,5 @@ public interface ILoadStringService
     /// <param name="url">load url for example: <example>http://google.com</example></param>
     /// <param name="urlEncoding"> encode url from web</param>
     /// <returns> return structure as string in memory</returns>
-    Task<IData> LoadFromUrlAsync(string url, FileEcodingType urlEncoding = FileEcodingType.UTF8);
+    Task<IData> LoadFromUrlAsync(string url, FileEcodingType urlEncoding = FileEcodingType.UTF8, CancellationToken cancellationToken = default);
 }

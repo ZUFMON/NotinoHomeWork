@@ -1,7 +1,8 @@
 ﻿using CommandQuery;
-using Nutino.HomeWork.Domain.Shared;
+using Notino.HomeWork.Contracts.Interfaces;
+using Notino.HomeWork.Domain.Shared;
 
-namespace Nutino.HomeWork.API.CQS;
+namespace Notino.HomeWork.API.CQS;
 
     public class ShowUrlCqs : IQuery<ShowUrlReturnCqs>
     {
